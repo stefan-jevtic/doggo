@@ -89,7 +89,8 @@
 /*  ADMIN PANEL DASHBOARD */
 
 #v-pills-tab {
-    width: 25%;
+    width: 15%;
+    margin-top: 35px;
 }
 
  /* */ 
@@ -130,9 +131,6 @@
 
  /*    */
 
- body { 
-     padding-top:30px; 
-}
 .widget .panel-body { 
     padding:0px; 
 }

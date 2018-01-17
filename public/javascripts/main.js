@@ -1,3 +1,12 @@
+/**
+ * 
+ * 
+ * TODO: Proveri jos jednom sve regexe i da li je dobro zasticeno, ima bagova!
+ * 
+ * 
+ *  
+ */
+
 $(document).ready( () => {
 
     let usernameAvailability = false;
@@ -26,6 +35,7 @@ $(document).ready( () => {
                     }
                     else{
                         $('.username.error').text('Username is already taken!').css({'color': 'red', 'font-size': '12px'});
+                        usernameAvailability = false;
                     }
                 }
             })
@@ -37,64 +47,48 @@ $(document).ready( () => {
         const username = $('#tbUsername').val();
         const password = $('#tbPassword').val();
         const retype = $('#tbPasswordRetype').val();
-        // const avatar = $('#avatar').val().replace('C:\\fakepath\\', '').trim();
-        // const extension = avatar.split('.').pop();
         const signin = 'signin';
 
-        let error = false;
+        let counter = 0;
 
         const regEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         const regUser = /^\w{4,20}$/;
         const regPass = /^[A-z0-9]{5,20}\W?[A-z0-9]{0,20}$/;
-        //const regAvatar = /^(png|jpe?g)$/;
-
+        
         if(!regEmail.test(email)){
             $('.email.error').text('Email is invalid').css({'color': 'red', 'font-size': '12px'});
-            error = true;
+            counter++;
         }
         else{
             $('.email.error').text('');
-            error = false;
         }
 
         if(!regUser.test(username)){
             $('.username.error').text('Username is invalid! Must be at least 4 characters long').css({'color': 'red', 'font-size': '12px'});
-            error = true;
+            counter++;
         }
         else{
             $('.username.error').text('');
-            error = false;
         }
 
         if(!regPass.test(password)){
             $('.password.error').text('Password must be at least five characters long').css({'color': 'red', 'font-size': '12px'});
-            error = true;
+            counter++;
         }
         else{
             $('.password.error').text('');
-            error = false;
         }
 
         if(password !== retype){
             $('.retype.error').text('Passwords don\'t match').css({'color': 'red', 'font-size': '12px'});
-            error = true;
+            counter++;
         }
         else{
             $('.retype.error').text('Matching!').css({'color': 'green', 'font-size': '12px'});
-            error = false;
         }
 
-        // if(!regAvatar.test(extension)){
-        //     $('.avatar.error').text('Extension don\'t match! Must be jpg, png or jpeg').css({'color': 'red', 'font-size': '12px'});
-        //     error = true;
-        // }
-        // else{
-        //     $('.avatar.error').text('');
-        //     error = false;
-        // }
 
-
-        if(!error && usernameAvailability){
+        if(counter === 0 && usernameAvailability){
             $.ajax({
                 type: 'POST',
                 url: 'includes/ajax.php',
@@ -178,7 +172,6 @@ $(document).ready( () => {
         }
         else{
             $('.username.error').text('');
-            error = false;
         }
 
         $.ajax({
@@ -192,12 +185,12 @@ $(document).ready( () => {
                 }
                 else{
                     $('.username.error').text('Username is already taken!').css({'color': 'red', 'font-size': '12px'});
-                    available = true;
+                    available = false;
                 }
             }
         })
 
-        if(!error && !available){
+        if(!error && available){
             $.ajax({
                 type: 'POST',
                 url: 'includes/ajax.php',

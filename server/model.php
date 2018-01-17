@@ -37,6 +37,16 @@
             return false;
     }
 
+    function listUsers($conn){
+        $query = 'SELECT * FROM users';
+        $res = mysqli_query($conn, $query);
+
+        if(mysqli_num_rows($res) > 0)
+            return $res;
+        else
+            return false;
+    }
+
     function checkUsername($conn, $username){
         $query = 'SELECT * FROM users WHERE name = "'.$username.'"';
         $res = mysqli_query($conn, $query);
@@ -133,5 +143,15 @@
             else
                 return false;
         }
+    }
+
+    function adminUpdateUser($conn, $username, $email, $role, $id){
+        $query = 'UPDATE users SET name="'.$username.'", email="'.$email.'", role="'.$role.'" WHERE id='.$id;
+        $res = mysqli_query($conn, $query);
+
+        if($res)
+            return true;
+        else
+            return false;
     }
 ?>

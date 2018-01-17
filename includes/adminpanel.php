@@ -1,3 +1,12 @@
+<?php
+
+    include("../server/model.php");
+    include("../server/connection.php");
+
+?>
+<div class="row">
+
+
 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
   <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
   <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
@@ -34,67 +43,31 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th class="text-center"> No. </th>
-              <th class="text-center"> Name </th>
-              <th class="text-center"> Mobile No. </th>
-              <th class="text-center"> E-Mail </th>
-              <th class="text-center"> City </th>
+              <th class="text-center"> Id </th>
+              <th class="text-center"> Username </th>
+              <th class="text-center"> Email </th>
+              <th class="text-center"> Role </th>
+              <th class="text-center"> Join date </th>
               <th class="text-center">Update</th>
               <th class="text-center">Delete</th>
             </tr>
           </thead>
 
           <tbody>
+          <?php 
+            $res = listUsers($conn);
+            while($row = mysqli_fetch_array($res)):
+          ?>
             <tr class="edit" id="detail">
-              <td id="no" class="text-center"> 1 </td>
-              <td id="name" class="text-center"> ABC </td>
-              <td id="mobile" class="text-center"> 5412547854 </td>
-              <td id="mail" class="text-center"> abc@gmail.com </td>
-              <td id="city" class="text-center"> New York </td>
-              <td class="text-center"><button class="btn btn-primary">Change</button></td>
+              <td class="text-center id" id="<?= $row['id']?>"> <?= $row['id']?> </td>
+              <td class="text-center name"> <?= $row['name']?> </td>
+              <td class="text-center email"> <?= $row['email']?> </td>
+              <td class="text-center role"> <?= $row['role']?> </td>
+              <td class="text-center date"> <?= $row['date']?> </td>
+              <td class="text-center"><button class="btn btn-primary adminUpdateUser" data-target="#adminUpdateUser" data-toggle="modal" >Change</button></td>
               <td class="text-center"><button class="btn btn-danger">Delete</button></td>
             </tr>
-
-            <tr>
-              <td class="text-center"> 2 </td>
-              <td class="text-center"> DFG </td>
-              <td class="text-center"> 4025478965 </td>
-              <td class="text-center"> dfg@gmail.com </td>
-              <td class="text-center"> Los Angelos </td>
-              <td class="text-center"><button class="btn btn-primary">Change</button></td>
-              <td class="text-center"><button class="btn btn-danger">Delete</button></td>
-            </tr>
-
-            <tr>
-              <td class="text-center"> 3 </td>
-              <td class="text-center"> XYZ </td>
-              <td class="text-center"> 4102369745 </td>
-              <td class="text-center"> xyz@gmail.com </td>
-              <td class="text-center"> Las Vegas </td>
-              <td class="text-center"><button class="btn btn-primary">Change</button></td>
-              <td class="text-center"><button class="btn btn-danger">Delete</button></td>
-            </tr>
-
-            <tr>
-              <td class="text-center"> 4 </td>
-              <td class="text-center"> JKL </td>
-              <td class="text-center"> 2536541028 </td>
-              <td class="text-center"> jkl@gmail.com </td>
-              <td class="text-center"> California </td>
-              <td class="text-center"><button class="btn btn-primary">Change</button></td>
-              <td class="text-center"><button class="btn btn-danger">Delete</button></td>
-            </tr>
-
-            <tr>
-              <td class="text-center"> 5 </td>
-              <td class="text-center"> DFG </td>
-              <td class="text-center"> 4025478965 </td>
-              <td class="text-center"> dfg@gmail.com </td>
-              <td class="text-center"> Los Angelos </td>
-              <td class="text-center"><button class="btn btn-primary">Change</button></td>
-              <td class="text-center"><button class="btn btn-danger">Delete</button></td>
-            </tr>
-            
+            <?php endwhile; ?>
           </tbody>
         </table>
       </div>
@@ -217,4 +190,65 @@
 </div>
   <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">dsaaaaaaaaaaaa</div>
   <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+</div>
+
+</div>
+
+<!-- MODALS -->
+
+<div class="modal adminUpdateUser" tabindex="-1" id="adminUpdateUser" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Change username</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="">
+            <div class="form-group">
+                <label for="adminUpdateUsename">Username</label>
+                <input type="text" class="form-control" id="adminUpdateUsername" placeholder="Username">
+                <span class="username error"></span>
+            </div>
+            <div class="form-group">
+                <label for="adminUpdateEmail">Email</label>
+                <input type="email" class="form-control" id="adminUpdateEmail" placeholder="Email">
+                <span class="email error"></span>
+            </div>
+            <div class="form-group">
+                <label for="adminUpdateRole">Role:</label>
+                <select name="adminUpdateRole" id="adminUpdateRole" class="form-control">
+
+                </select>
+                <span class="role error"></span>
+            </div>
+            <input type="hidden" id="UserId">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="btnAdminUpdateUser">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--    SUCCESS MODAL     -->
+<div class="modal fade modalSuccess" id="modalFailedSignIn" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Success!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-success">
+            
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

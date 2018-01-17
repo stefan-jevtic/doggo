@@ -117,4 +117,18 @@ include("../server/model.php");
         else
             echo 'Failure';
     }
+
+    if(isset($_POST['adminUpdateUser'])){
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $role = $_POST['role'];
+        $id = $_POST['id'];
+
+        $res = adminUpdateUser($conn, $username, $email, $role, $id);
+
+        if($res)
+            echo 'Success';
+        else
+            echo 'Failure';
+    }
 ?>
