@@ -22,11 +22,6 @@
                 <input type="password" class="form-control" id="tbPasswordRetype" placeholder="Retype password">
                 <span class="retype error"></span>
             </div>
-            <!-- <div class="form-group">
-                <label for="avatar">Choose Avatar</label>
-                <input type="file" class="form-control" name="avatar" id="avatar" placeholder="Choose Avatar">
-                <span class="avatar error"></span>
-            </div> -->
             <button type="button" class="btn btn-primary" name="btnSignUp" id="btnSignUp">Sign Up</button>
         </form>
     </div>

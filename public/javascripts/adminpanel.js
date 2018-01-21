@@ -128,4 +128,21 @@ $(document).ready( () => {
         }
     })
 
+    $(document).on('click', '.adminDeleteUser', function(){
+        const id = $(this).parent().parent().find('td.id').text().trim();
+        const adminDeleteUser = 'adminDeleteUser';
+        const that = this;
+
+        $.ajax({
+            type: 'POST',
+            url: 'includes/ajax.php',
+            data: {id, adminDeleteUser},
+            success(data){
+                if(data == 'Success'){
+                    $(that).parent().parent().remove();
+                }
+            }
+        })
+    })
+
 });

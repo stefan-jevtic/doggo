@@ -65,7 +65,7 @@
               <td class="text-center role"> <?= $row['role']?> </td>
               <td class="text-center date"> <?= $row['date']?> </td>
               <td class="text-center"><button class="btn btn-primary adminUpdateUser" data-target="#adminUpdateUser" data-toggle="modal" >Change</button></td>
-              <td class="text-center"><button class="btn btn-danger">Delete</button></td>
+              <td class="text-center"><button class="btn btn-danger adminDeleteUser" >Delete</button></td>
             </tr>
             <?php endwhile; ?>
           </tbody>

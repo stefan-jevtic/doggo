@@ -1,12 +1,3 @@
-/**
- * 
- * 
- * TODO: Proveri jos jednom sve regexe i da li je dobro zasticeno, ima bagova!
- * 
- * 
- *  
- */
-
 $(document).ready( () => {
 
     let usernameAvailability = false;

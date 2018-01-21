@@ -154,4 +154,41 @@
         else
             return false;
     }
+
+    function adminDeleteUser($conn, $id){
+        $query = 'DELETE from users WHERE id='.$id;
+        $res = mysqli_query($conn, $query);
+
+        if($res)
+            return true;
+        else
+            return false;
+    }
+
+    function listCategories($conn){
+        $query = 'SELECT * FROM category';
+        $res = mysqli_query($conn, $query);
+        
+        if($res)
+            return $res;
+        else
+            return false;
+    }
+
+    function uploadDoggo($conn, $title, $description, $category, $tmp, $href, $id){
+
+        $date = date("Y-m-d H:i:s");
+
+        if(move_uploaded_file($tmp, $href)){
+
+            $query = 'INSERT INTO doggos(title, description, photo, id_user, id_category, date) VALUES ("'.$title.'", "'.$description.'", "'.substr($href, 3).'", '.$id.', '.$category.', "'.$date.'")';
+            $res = mysqli_query($conn, $query);
+
+            if($res)
+                return true;
+            else 
+                return false;
+        }
+
+    }
 ?>

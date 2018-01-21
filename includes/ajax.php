@@ -131,4 +131,35 @@ include("../server/model.php");
         else
             echo 'Failure';
     }
+
+    if(isset($_POST['adminDeleteUser'])){
+        $id = $_POST['id'];
+
+        $res = adminDeleteUser($conn, $id);
+
+        if($res)
+            echo 'Success';
+        else
+            echo 'Failure';
+    }
+
+    if(isset($_POST['tbDoggoTitle'])){
+        $title = $_POST['tbDoggoTitle'];
+        $desc = $_POST['taDoggoDescription'];
+        $category = (int)$_POST['ddlDoggoCategory'];
+        $photo_name = $_FILES['flDoggo']['name'];
+        $tmp = $_FILES['flDoggo']['tmp_name'];
+        $folder = '../public/images/';
+        $id = $_SESSION['id'];
+
+        $res = uploadDoggo($conn, $title, $desc, $category, $tmp, $folder.$photo_name, $id);
+
+        if($res)
+            header("Location: http://localhost/doggo/index.php?id=8");
+        else
+            echo 'doggo not uploaded';
+
+       
+    }
+
 ?>
