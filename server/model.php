@@ -189,6 +189,41 @@
             else 
                 return false;
         }
+    }
 
+    function listAllDoggos($conn){
+        $query = 'SELECT * FROM doggos';
+        $res = mysqli_query($conn, $query);
+
+        if(mysqli_num_rows($res)>0){
+            return $res;
+        }
+    }
+
+    function listCommentsForDoggo($conn, $id_doggo){
+        $query = 'SELECT * FROM comments c INNER JOIN users u ON c.id_user = u.id WHERE id_doggo='.$id_doggo;
+        $res = mysqli_query($conn, $query);
+
+        if(mysqli_num_rows($res)>0){
+            return $res;
+        }
+        else 
+            return 'No comments yet';
+    }
+
+    function insertComment($conn, $id_doggo, $id_user, $comment){
+        $date = date("Y-m-d H:i:s");
+
+        $query = 'INSERT INTO comments (id_user, id_doggo, comment, date_commented) VALUES ('.$id_user.', '.$id_doggo.', "'.$comment.'", "'.$date.'")';
+        $res = mysqli_query($conn, $query);
+
+        if($res){
+            $query1 = 'SELECT * FROM users WHERE id='.$id_user;
+            $res1 = mysqli_query($conn, $query1);
+            $row = mysqli_fetch_array($res1);
+return $row;
+           
+                
+        }
     }
 ?>

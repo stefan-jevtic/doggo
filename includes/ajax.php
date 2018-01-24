@@ -158,8 +158,17 @@ include("../server/model.php");
             header("Location: http://localhost/doggo/index.php?id=8");
         else
             echo 'doggo not uploaded';
+    }
 
-       
+    if(isset($_POST['insertComment'])){
+        $id_doggo = $_POST['id_doggo'];
+        $id_user = $_POST['id_user'];
+        $comment = $_POST['text'];
+
+        $res = insertComment($conn, $id_doggo, $id_user, $comment);
+
+        if($res)
+            echo json_encode($res);
     }
 
 ?>

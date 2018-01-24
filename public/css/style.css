@@ -172,10 +172,16 @@
     width: 100%;
     /*height: 500px;*/
     padding: 10px;
+    margin-bottom: 20px;    
 }
 
 .image-container {
     border: 1px solid #428bca;
+    width: 100%;
+    height: 300px;
+}
+
+.image-container img{
     width: 100%;
     height: 300px;
 }
@@ -199,39 +205,52 @@
     margin-bottom: 15px;
 }
 
-.buttons span{
+.buttons a{
     flex: 1 1 33%;
 }
 
-.like-button  {
+.like-button-link  {
     color: #428bca;
     padding: 10px 0px 10px 0px;
     border-radius: 10px;
 }
-.like-button:hover  {
+.like-button-link:hover  {
     background-color: #d0edf5;
     transition: all 0.7s;
     cursor: pointer;
+    color: #428bca;
 }
-.dislike-button  {
+.dislike-button-link  {
     color: #e20808;
     padding: 10px 0px 10px 0px;
     border-radius: 10px;
 }
-.dislike-button:hover  {
+.dislike-button-link:hover  {
     background-color: #f5d0d0;
     transition: all 0.7s;
     cursor: pointer;
+    color: #e20808;
 }
-.comment-button  {
+.comment-button-link  {
     color: #00e466;
     padding: 10px 0px 10px 0px;
     border-radius: 10px;
 }
-.comment-button:hover  {
+.comment-button-link:hover  {
     background-color: #b8f8a8;
     transition: all 0.7s;
     cursor: pointer;
+    color: #00e466;
+}
+
+.insert-comment{
+    display: none;
+}
+.insert-comment textarea {
+    margin-bottom: 10px;
+}
+.active {
+    display: block;
 }
 
 .list-of-comments {
@@ -255,8 +274,15 @@
     height: 70px;
     border-radius: 35px;
     margin: 10px;
-    border: 1px solid tomato;
 }
+
+.user-image img{
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    float: left;
+}
+
 .user-name{
     color: #428bca;
     font-style: italic;
