@@ -171,4 +171,30 @@ include("../server/model.php");
             echo json_encode($res);
     }
 
+    if(isset($_POST['likedPost'])){
+        $id_user = (int)$_POST['id_user'];
+        $id_doggo = (int)$_POST['id_doggo'];
+        $like = $_POST['like'];
+
+        $res = insertLike($conn, $id_doggo, $id_user, $like);
+
+        if($res)
+            echo true;
+        else
+            echo false;
+    }
+
+    if(isset($_POST['dislikedPost'])){
+        $id_user = (int)$_POST['id_user'];
+        $id_doggo = (int)$_POST['id_doggo'];
+        $dislike = $_POST['dislike'];
+        var_dump($id_doggo . ' '. $id_user);
+        $res = insertDislike($conn, $id_doggo, $id_user, $dislike);
+
+        if($res)
+            echo true;
+        else
+            echo false;
+    }
+
 ?>

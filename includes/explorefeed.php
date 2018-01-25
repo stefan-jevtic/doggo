@@ -14,15 +14,33 @@
             </div>
             <div class="actions">
                 <div class="statistics">
-                    <small class="form-text text-muted likes-counter">10 likes</small>
-                    <small class="form-text text-muted dislikes-counter">3 dislikes</small>
-                    <small class="form-text text-muted comments-counter">42 comments</small>
+                    <small class="form-text text-muted likes-counter"><?php $num = countLikes($conn, $row['id']); echo $num['num_likes']; ?> likes</small>
+                    <small class="form-text text-muted dislikes-counter"><?php $num = countDislikes($conn, $row['id']); echo $num['num_dislikes']; ?> dislikes</small>
+                    <small class="form-text text-muted comments-counter"><?php $num = countComments($conn, $row['id']); echo $num['num_comm']; ?> comments</small>
                 </div>
                 <div class="buttons">
-                    <a href="#" class="like-button-link">
+                    <?php 
+                        $like = checkLike($conn, $_SESSION['id'], $row['id']); 
+                        if($like) {
+                            $liked = 'liked';
+                        }
+                        else{
+                            $liked = '';
+                        }
+                    ?>
+                    <a href="#" class="like-button-link <?=$liked ?>">
                         <span class="like-button"><i class="far fa-thumbs-up"></i></span>
                     </a>
-                    <a href="#" class="dislike-button-link">
+                    <?php 
+                        $dislike = checkDislike($conn, $_SESSION['id'], $row['id']); 
+                        if($dislike) {
+                            $disliked = 'disliked';
+                        }
+                        else{
+                            $disliked = '';
+                        }
+                    ?>
+                    <a href="#" class="dislike-button-link <?=$disliked ?>">
                         <span class="dislike-button"><i class="far fa-thumbs-down"></i></span>
                     </a>
                     <a href="#" class="comment-button-link">
@@ -53,8 +71,8 @@
                             echo $comments;
                     endif; 
                 ?>
-                <a href="#"><small class="form-test text-muted">Load more comments</small></a>
             </div>
+            <a href="#" class="load-more"><small class="form-test text-muted">Load more comments</small></a>
         </div>
         <?php endwhile ?>
     </div>

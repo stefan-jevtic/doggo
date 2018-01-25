@@ -226,4 +226,97 @@ return $row;
                 
         }
     }
+
+    function insertLike($conn, $id_doggo, $id_user, $lajk){
+        $q = 'SELECT * FROM likes WHERE id_user='.$id_user.' AND id_doggo='.$id_doggo.'';
+        $r = mysqli_query($conn, $q);
+
+        if(mysqli_num_rows($r) == 0){
+            
+            $q1 = 'INSERT INTO likes(id_user, id_doggo, lajk, dislike) VALUES('.$id_user.', '.$id_doggo.', '.$lajk.', 0)';
+            $r1 = mysqli_query($conn, $q1);
+            
+            if($r1)
+                return true;
+            else
+                return false;
+        }
+        else {
+            $q2 = 'UPDATE likes SET lajk = '.$lajk.', dislike = 0 WHERE id_user = '.$id_user.' AND id_doggo = '.$id_doggo;
+            $r2 = mysqli_query($conn, $q2);
+
+            if($r2)
+                return true;
+            else 
+                return false;
+        }
+    }
+
+    function insertDislike($conn, $id_doggo, $id_user, $dislike){
+        $q = 'SELECT * FROM likes WHERE id_user='.$id_user.' AND id_doggo='.$id_doggo.'';
+        $r = mysqli_query($conn, $q);
+
+        if(mysqli_num_rows($r) == 0){
+            $q1 = 'INSERT INTO likes (id_user, id_doggo, lajk, dislike) VALUES ('.$id_user.', '.$id_doggo.', 0, '.$dislike.')';
+            $r1 = mysqli_query($conn, $q1);
+
+            if($r1)
+                return true;
+            else
+                return false;
+        }
+        else {
+            $q2 = 'UPDATE likes SET lajk = 0, dislike = '.$dislike.' WHERE id_user = '.$id_user.' AND id_doggo = '.$id_doggo;
+            $r2 = mysqli_query($conn, $q2);
+
+            if($r2)
+                return true;
+            else 
+                return false;
+        }
+    }
+
+    function countComments($conn, $id_doggo){
+        $query = 'SELECT COUNT(*) as num_comm FROM comments WHERE id_doggo='.$id_doggo;
+        $res = mysqli_query($conn, $query);
+        $num = mysqli_fetch_array($res);
+
+        return $num;
+    }
+
+    function countLikes($conn, $id_doggo){
+        $query = 'SELECT COUNT(*) as num_likes FROM likes WHERE id_doggo='.$id_doggo.' AND lajk = 1';
+        $res = mysqli_query($conn, $query);
+        $num = mysqli_fetch_array($res);
+
+        return $num;
+    }
+
+    function countDislikes($conn, $id_doggo){
+        $query = 'SELECT COUNT(*) as num_dislikes FROM likes WHERE id_doggo='.$id_doggo.' AND dislike = 1';
+        $res = mysqli_query($conn, $query);
+        $num = mysqli_fetch_array($res);
+
+        return $num;
+    }
+
+    function checkLike($conn, $id_u, $id_d){
+        $q = 'SELECT * FROM likes WHERE id_user = '.$id_u.' AND id_doggo = '.$id_d.' AND lajk = 1';
+        $r = mysqli_query($conn, $q);
+
+        if(mysqli_num_rows($r) == 1)
+            return true;
+        else
+            return false;
+    }
+
+    function checkDislike($conn, $id_u, $id_d){
+        $q = 'SELECT * FROM likes WHERE id_user = '.$id_u.' AND id_doggo = '.$id_d.' AND dislike = 1';
+        $r = mysqli_query($conn, $q);
+
+        if(mysqli_num_rows($r) == 1)
+            return true;
+        else
+            return false;
+    }
 ?>
