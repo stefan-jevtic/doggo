@@ -2,12 +2,13 @@ $(document).ready( () => {
 
     $('.comment-button-link').click( function(e) {
         e.preventDefault();
-        if($('.insert-comment').hasClass('active')){
-            $(this).parent().parent().find('.insert-comment').removeClass('active');
+        const root = $(this).parent().parent().find('.insert-comment');
+        if(root.hasClass('active')){
+           root.removeClass('active');
         }
         else {
-           $(this).parent().parent().find('.insert-comment').addClass('active');
-           $(this).parent().parent().find('.insert-comment textarea').focus();
+           root.addClass('active');
+           root.find('textarea').focus();
         }
     })
 
