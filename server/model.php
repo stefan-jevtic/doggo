@@ -319,4 +319,19 @@ return $row;
         else
             return false;
     }
+
+    function listAllComments($conn){
+        $q = 'SELECT c.*, u.avatar, u.name FROM comments c INNER JOIN users u ON u.id = c.id_user';
+        $r = mysqli_query($conn, $q);
+
+        $records = [];
+        while($row = mysqli_fetch_array($r)){
+            array_push($records, ["id_user"=>$row['id_user'], "id_doggo"=>$row['id_doggo'], "comment" => $row['comment'], "date" => $row['date_commented'], "username" => $row['name'], "avatar" => $row['avatar']]);
+        }
+
+        if($r)
+            return $records;
+        else
+            return false;
+    }
 ?>

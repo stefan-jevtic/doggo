@@ -309,6 +309,8 @@
     bottom: 0;
     position: absolute;
     text-align: center;
+    width: 97%;
+    font-size: 10px;
 }
 .liked {
     background-color: #d0edf5;

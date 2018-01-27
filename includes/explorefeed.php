@@ -57,7 +57,9 @@
                 <?php
                     $comments = listCommentsForDoggo($conn, $row['id']);
                     if(mysqli_num_rows($comments) > 0):
+                        $counter = 0;
                         while($comment = mysqli_fetch_array($comments)):
+                            if($counter == 3) break;
                 ?>  
                 <div class="each-comment">
                     <span class="user-image"><img src="<?= $comment['avatar'] ?>" alt="<?= $comment['name'].'&'.$_SESSION['id'] ?>"></span>
@@ -66,13 +68,14 @@
                     <div class="user-message"><p><?= $comment['comment'] ?></p></div>
                 </div>
                 <?php 
+                        $counter++;
                         endwhile;
                     else:
                             echo $comments;
                     endif; 
                 ?>
             </div>
-            <a href="#" class="load-more"><small class="form-test text-muted">Load more comments</small></a>
+            <a href="<?=$row['id'] ?>" class="btn btn-primary btn-block load-more">Load more comments</a>
         </div>
         <?php endwhile ?>
     </div>

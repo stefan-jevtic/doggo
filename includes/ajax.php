@@ -197,4 +197,13 @@ include("../server/model.php");
             echo false;
     }
 
+    if(isset($_POST['all_comments'])){
+        $res = listAllComments($conn);
+        
+        if($res)
+            echo json_encode($res);
+        else
+            echo false;
+    }
+
 ?>

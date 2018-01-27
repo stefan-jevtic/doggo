@@ -1,5 +1,62 @@
 $(document).ready( () => {
 
+    /**
+     *  BRISE SE SVE, NE RADI, MORA LOGIKA DA SE PREMESTI NA BACKEND
+     */
+    let ALL_COMMENTS;
+    let all_comments = 'all_comments';
+    $.ajax({
+        type: 'POST',
+        url: 'includes/ajax.php',
+        data: { all_comments },
+        success(data){
+            if(data){
+                data = JSON.parse(data);
+                ALL_COMMENTS = data;
+                console.log(ALL_COMMENTS)
+            }
+        }
+    })
+
+    let crop = 3;
+    let id_of_current_doggo = 1;
+
+    function slice_comments(id_doggo, niz){
+        if(id_doggo == id_of_current_doggo){
+            let append = niz.slice(crop, ++crop);
+            crop++;
+            return append;
+        }
+        else {
+            crop = 3;
+            return niz.slice(crop, ++crop);
+        }
+    }
+  
+    $('.load-more').click(function(e){
+        e.preventDefault();
+        const root = $(this).parent();
+        const doggo_id = $(this).attr('href');
+        let html = '';
+        let comments = ALL_COMMENTS.filter( comment => {
+            return comment.id_doggo == doggo_id;
+        })
+
+        let res = slice_comments(doggo_id, comments);
+
+        res.map( comm => {
+            html += '<div class="each-comment"><span class="user-image"><img src="'+comm.avatar+'" alt="'+comm.username +'&' + comm.id_user+'"></span><span class="user-name"><b>'+comm.username+'</b></span><small class="form-test text-muted date-commented">'+comm.date+'</small><div class="user-message"><p>'+comm.comment+'</p></div></div>';
+        })
+
+        root.find('.list-of-comments').append(html);
+        
+        id_of_current_doggo = doggo_id;
+
+    })
+
+    /**
+     * KRAJ
+     */
     $('.comment-button-link').click( function(e) {
         e.preventDefault();
         const root = $(this).parent().parent().find('.insert-comment');
@@ -45,7 +102,7 @@ $(document).ready( () => {
                     
                     if(root.find('.dislike-button-link').hasClass('disliked')){
                         root.find('.dislike-button-link').removeClass('disliked');
-                        let num_dislikes = root.find('.statistics').find('.likes-counter').text().replace(/[^\d]/g, '').trim();
+                        let num_dislikes = root.find('.statistics').find('.dislikes-counter').text().replace(/[^\d]/g, '').trim();
                         root.find('.statistics').find('.dislikes-counter').text(--num_dislikes + ' dislikes');
                     }
                 }
@@ -85,7 +142,7 @@ $(document).ready( () => {
                     }
                     if(root.find('.like-button-link').hasClass('liked')){
                         root.find('.like-button-link').removeClass('liked');
-                        let num_likes = root.find('.statistics').find('.dislikes-counter').text().replace(/[^\d]/g, '').trim();
+                        let num_likes = root.find('.statistics').find('.likes-counter').text().replace(/[^\d]/g, '').trim();
                         root.find('.statistics').find('.likes-counter').text(--num_likes + ' likes');
                     }
                 }
