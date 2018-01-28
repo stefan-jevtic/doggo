@@ -27,8 +27,12 @@
                         else{
                             $liked = '';
                         }
+                        if(isset($_SESSION['id']))
+                            $not_active = '';
+                        else
+                            $not_active = 'not-active'
                     ?>
-                    <a href="#" class="like-button-link <?=$liked ?>">
+                    <a href="#" class="like-button-link <?=$liked.' '.$not_active ?>">
                         <span class="like-button"><i class="far fa-thumbs-up"></i></span>
                     </a>
                     <?php 
@@ -40,10 +44,10 @@
                             $disliked = '';
                         }
                     ?>
-                    <a href="#" class="dislike-button-link <?=$disliked ?>">
+                    <a href="#" class="dislike-button-link <?=$disliked.' '.$not_active ?> ">
                         <span class="dislike-button"><i class="far fa-thumbs-down"></i></span>
                     </a>
-                    <a href="#" class="comment-button-link">
+                    <a href="#" class="comment-button-link <?=$not_active ?>">
                         <span class="comment-button"><i class="far fa-comments"></i></span>
                     </a>
                 </div>

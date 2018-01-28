@@ -319,3 +319,28 @@
 .disliked {
     background-color: #f5d0d0;
 }
+
+.not-active {
+    pointer-events: none;
+    cursor: not-allowed;
+}
+.gallery-holder{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+div.polaroid {
+    flex: 1 1 250px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 25px;
+
+}
+div.paragraph {
+    text-align: center;
+    padding: 10px 20px;
+}
+#myTabContent h2, h3, h4, h5{
+    text-align: center;
+    margin: 30px;
+}

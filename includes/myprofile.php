@@ -34,7 +34,7 @@ session_start();
             </a>
         </li>
         <li class="nav-item tabovi">
-            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">
+            <a class="nav-link " id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">
                 <span class="far fa-user fa-3x" aria-hidden="true"></span>
                 <!-- <span class="hidden-xs">User info</div -->
             </a>
@@ -43,8 +43,38 @@ session_start();
 
     <div class="well">
         <div class="tab-content lg-9" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">aaaaaaaaaaaaa</div>
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">bbbbbbbbbbb</div>
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <h2>Uploaded Doggos</h2>
+                <div class="gallery-holder">
+                    <?php 
+                        $dogs = listUploadedDoggos($conn, $_SESSION['id']);
+                        while($dog = mysqli_fetch_array($dogs)):
+                    ?>
+                    <div class="polaroid">
+                        <img src="<?= $dog['photo'] ?>" alt="<?= $dog['title'] ?>" style="width:100%">
+                        <div class="paragraph">
+                            <p><?= $dog['title'] ?></p>
+                        </div>
+                    </div>
+                    <?php endwhile ?>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <h2>Doggos you like</h2>
+                <div class="gallery-holder">
+                    <?php
+                        $doglikes = listLikedDoggos($conn, $_SESSION['id']);
+                        while($doglike = mysqli_fetch_array($doglikes)):
+                    ?>
+                    <div class="polaroid">
+                        <img src="<?= $doglike['photo'] ?>" alt="<?= $doglike['title'] ?>" style="width:100%">
+                        <div class="paragraph">
+                            <p><?= $doglike['title'] ?></p>
+                        </div>
+                    </div>
+                    <?php endwhile ?>
+                </div>
+            </div>
             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                 <h3><strong>Basic information:</strong></h3>
                 <table class="table table-striped">

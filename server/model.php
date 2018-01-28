@@ -334,4 +334,23 @@ return $row;
         else
             return false;
     }
+
+    function listUploadedDoggos($conn, $user_id){
+        $q = 'SELECT * FROM doggos WHERE id_user='.$user_id;
+        $r = mysqli_query($conn, $q);
+
+        if($r)
+            return $r;
+    }
+
+    function listLikedDoggos($conn, $user_id){
+        $q = 'SELECT d.* FROM doggos d INNER JOIN likes l ON d.id = l.id_doggo WHERE l.id_user='.$user_id.' AND l.lajk = 1';
+        $r = mysqli_query($conn, $q);
+
+        if($r)
+            return $r;
+    }
+
+    // select count(lajk) as lajkovi, id_doggo from likes where lajk = 1 and id_doggo in (1,4,9) group by id_doggo;
+
 ?>
