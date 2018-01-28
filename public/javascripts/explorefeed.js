@@ -18,18 +18,25 @@ $(document).ready( () => {
         }
     })
 
-    let crop = 3;
-    let id_of_current_doggo = 1;
+    let crop_for_each = [];
+    let id_of_current_doggo = [];
 
-    function slice_comments(id_doggo, niz){
-        if(id_doggo == id_of_current_doggo){
-            let append = niz.slice(crop, ++crop);
-            crop++;
+    function slice_comments(obj, id_doggo, niz){
+        if(id_of_current_doggo.includes(id_doggo)){
+            let crop;
+            for(let i=0; i < crop_for_each.length; i++){
+                if(crop_for_each[i].doggo_id == id_doggo){
+                    crop_for_each[i].crop++;
+                    crop = crop_for_each[i].crop;
+                }
+            }
+            let append = niz.slice(crop, crop+1);
             return append;
         }
         else {
-            crop = 3;
-            return niz.slice(crop, ++crop);
+            crop_for_each.push(obj);
+            id_of_current_doggo.push(id_doggo);
+            return niz.slice(3, 4);
         }
     }
   
@@ -38,11 +45,13 @@ $(document).ready( () => {
         const root = $(this).parent();
         const doggo_id = $(this).attr('href');
         let html = '';
+        let crop = 3;
+        obj = {doggo_id, crop};
         let comments = ALL_COMMENTS.filter( comment => {
             return comment.id_doggo == doggo_id;
         })
 
-        let res = slice_comments(doggo_id, comments);
+        let res = slice_comments(obj, doggo_id, comments);
 
         res.map( comm => {
             html += '<div class="each-comment"><span class="user-image"><img src="'+comm.avatar+'" alt="'+comm.username +'&' + comm.id_user+'"></span><span class="user-name"><b>'+comm.username+'</b></span><small class="form-test text-muted date-commented">'+comm.date+'</small><div class="user-message"><p>'+comm.comment+'</p></div></div>';
@@ -50,7 +59,7 @@ $(document).ready( () => {
 
         root.find('.list-of-comments').append(html);
         
-        id_of_current_doggo = doggo_id;
+
 
     })
 
