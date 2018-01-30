@@ -1,8 +1,5 @@
 $(document).ready( () => {
 
-    /**
-     *  BRISE SE SVE, NE RADI, MORA LOGIKA DA SE PREMESTI NA BACKEND
-     */
     let ALL_COMMENTS;
     let all_comments = 'all_comments';
     $.ajax({
@@ -63,9 +60,6 @@ $(document).ready( () => {
 
     })
 
-    /**
-     * KRAJ
-     */
     $('.comment-button-link').click( function(e) {
         e.preventDefault();
         const root = $(this).parent().parent().find('.insert-comment');
