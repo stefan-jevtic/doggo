@@ -350,7 +350,16 @@ return $row;
         if($r)
             return $r;
     }
-
     // select count(lajk) as lajkovi, id_doggo from likes where lajk = 1 and id_doggo in (1,4,9) group by id_doggo;
+
+    function listAllDoggosAndUsers($conn){
+        $q = 'SELECT d.*, u.name as username FROM doggos d INNER JOIN users u on u.id = d.id_user';
+        $r = mysqli_query($conn, $q);
+        if(mysqli_num_rows($r) > 0){
+            return $r;
+        }
+        else
+            return false;
+    }
 
 ?>

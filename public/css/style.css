@@ -340,7 +340,30 @@ div.paragraph {
     text-align: center;
     padding: 10px 20px;
 }
-#myTabContent h2, h3, h4, h5{
+#myTabContent h2, h3, h4, h5{   
     text-align: center;
     margin: 30px;
+}
+.content-holder{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+#v-pills-tab{
+    flex: 1 1 15%;
+}
+#v-pills-tabContent{
+    flex: 1 1 85%;
+}
+.adminPanelDoggo{
+    flex: 1 1 80px;
+}
+.adminPanelDoggo img{
+    width: 80px; /* or any custom size */
+    height: 80px; 
+    object-fit: contain;
+}
+.kurcina{
+    width: 800px;
 }

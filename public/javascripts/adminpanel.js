@@ -145,4 +145,24 @@ $(document).ready( () => {
         })
     })
 
+    $(document).on('click', '.adminEditDoggo', function(){
+        // $('ul.list-group').find('.updateDoggoDesc').removeClass('updateDoggoDesc');
+        const root = $(this).parent().parent().parent();
+        const title = root.find('.title-doggo').text().trim();
+        const desc = root.find('.comment-text').text().trim();
+        const textarea = `<textarea class="form-control doggoDesc">${desc}</textarea>`;
+        root.find('.comment-text').html(textarea);
+        const input = `<input type="text" class="form-control titleDoggo" value="${title}">`;
+        root.find('.title-doggo').html(input);
+
+        $(this).text('Update').addClass('updateDoggoDesc');
+    });
+
+    $(document).on('click', '.updateDoggoDesc', function(){
+        const root = $(this).parent().parent().parent();
+        const id = root.find('.adminPanelDoggo img').attr('alt').split('&')[1].trim();
+        const title = root.find('.titleDoggo').val();
+        const desc = root.find('.doggoDesc').val();
+        alert(`${title}, ${desc}`);
+    })
 });

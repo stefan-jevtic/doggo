@@ -6,8 +6,8 @@
 ?>
 <div class="row">
 
-
-<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+<div class="content-holder">
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
   <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
   <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
   <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
@@ -90,100 +90,51 @@
                 <span class="glyphicon glyphicon-comment"></span>
                 <h3 class="panel-title">
                     Recent Comments</h3>
-                <span class="label label-info">
-                    78</span>
             </div>
             <div class="panel-body">
                 <ul class="list-group">
+                    <?php 
+                        $all = listAllDoggosAndUsers($conn); 
+                        while($each = mysqli_fetch_array($all)):
+                    ?>
                     <li class="list-group-item">
                         <div class="row">
-                            <div class="col-xs-2 col-md-1">
-                                <img src="http://placehold.it/80" class="rounded-circle img-responsive" alt="" /></div>
-                            <div class="col-xs-10 col-md-11">
+                            <div class="col-xs-2 col-md-1 adminPanelDoggo">
+                                <img src="<?=$each['photo']?>" class="rounded-circle img-responsive" alt="<?=$each['title']."&".$each['id']?>" /></div>
+                            <div class="col-xs-10 col-md-11 kurcina">
                                 <div>
-                                    <a href="http://www.jquery2dotnet.com/2013/10/google-style-login-page-desing-usign.html">
-                                        Google Style Login Page Design Using Bootstrap</a>
+                                    <div class="title-doggo">
+                                        <?=$each['title']?>
+                                    </div>
                                     <div class="mic-info">
-                                        By: <a href="#">Bhaumik Patel</a> on 2 Aug 2013
+                                        By: <b><?=$each['username']?></a></b> on <b><?=$each['date']?></b>
                                     </div>
                                 </div>
                                 <div class="comment-text">
-                                    Awesome design
+                                    <?=$each['description']?>
                                 </div>
                                 <div class="action">
-                                    <button type="button" class="btn btn-primary btn-xs" title="Edit">
-                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    <button type="button" class="btn btn-primary btn-xs adminEditDoggo" title="Edit">
+                                        <span class="far fa-edit"></span>
                                     </button>
-                                    <button type="button" class="btn btn-success btn-xs" title="Approved">
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-xs" title="Delete">
-                                        <span class="glyphicon glyphicon-trash"></span>
+                                    <button type="button" class="btn btn-danger btn-xs adminDeleteDoggo" title="Delete">
+                                        <span class="far fa-trash-alt"></span>
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </li>
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-xs-2 col-md-1">
-                                <img src="http://placehold.it/80" class="rounded-circle img-responsive" alt="" /></div>
-                            <div class="col-xs-10 col-md-11">
-                                <div>
-                                    <a href="http://bootsnipp.com/BhaumikPatel/snippets/Obgj">Admin Panel Quick Shortcuts</a>
-                                    <div class="mic-info">
-                                        By: <a href="#">Bhaumik Patel</a> on 11 Nov 2013
-                                    </div>
-                                </div>
-                                <div class="comment-text">
-                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-                                    euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim
-                                </div>
-                                <div class="action">
-                                    <button type="button" class="btn btn-primary btn-xs" title="Edit">
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                    </button>
-                                    <button type="button" class="btn btn-success btn-xs" title="Approved">
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-xs" title="Delete">
-                                        <span class="glyphicon glyphicon-trash"></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-xs-2 col-md-1">
-                                <img src="http://placehold.it/80" class="rounded-circle img-responsive" alt="" /></div>
-                            <div class="col-xs-10 col-md-11">
-                                <div>
-                                    <a href="http://bootsnipp.com/BhaumikPatel/snippets/4ldn">Cool Sign Up</a>
-                                    <div class="mic-info">
-                                        By: <a href="#">Bhaumik Patel</a> on 11 Nov 2013
-                                    </div>
-                                </div>
-                                <div class="comment-text">
-                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-                                    euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim
-                                </div>
-                                <div class="action">
-                                    <button type="button" class="btn btn-primary btn-xs" title="Edit">
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                    </button>
-                                    <button type="button" class="btn btn-success btn-xs" title="Approved">
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-xs" title="Delete">
-                                        <span class="glyphicon glyphicon-trash"></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                    <?php endwhile ?>
                 </ul>
-                <a href="#" class="btn btn-primary btn-sm btn-block" role="button"><span class="glyphicon glyphicon-refresh"></span> More</a>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
@@ -191,6 +142,8 @@
   <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">dsaaaaaaaaaaaa</div>
   <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
 </div>
+</div>
+
 
 </div>
 
