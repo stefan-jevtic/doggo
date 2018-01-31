@@ -206,4 +206,39 @@ include("../server/model.php");
             echo false;
     }
 
+    if(isset($_POST['updateDoggoInfo'])){
+        $id = $_POST['id'];
+        $title = $_POST['title'];
+        $desc = $_POST['desc'];
+
+        $res = updateDoggoInfo($conn, $id, $title, $desc);
+
+        if($res)
+            echo true;
+        else
+            echo false;
+    }
+
+    if(isset($_POST['deleteDoggo'])){
+        $id = $_POST['id'];
+        $res = deleteDoggo($conn, $id);
+
+        if($res)
+            echo true;
+        else
+            echo false;
+    }
+
+    if(isset($_POST['pagginate'])){
+        $num = $_POST['num'];
+
+        $res = pagginateDoggos($num);
+
+        // if($res)
+        //     echo $res;
+        // else
+        //     echo false;
+        echo $res;
+    }
+
 ?>

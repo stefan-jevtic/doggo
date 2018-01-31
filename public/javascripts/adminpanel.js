@@ -146,23 +146,75 @@ $(document).ready( () => {
     })
 
     $(document).on('click', '.adminEditDoggo', function(){
-        // $('ul.list-group').find('.updateDoggoDesc').removeClass('updateDoggoDesc');
         const root = $(this).parent().parent().parent();
         const title = root.find('.title-doggo').text().trim();
         const desc = root.find('.comment-text').text().trim();
         const textarea = `<textarea class="form-control doggoDesc">${desc}</textarea>`;
         root.find('.comment-text').html(textarea);
-        const input = `<input type="text" class="form-control titleDoggo" value="${title}">`;
+        const input = `<input type="text" class="form-control doggoTitle" value="${title}">`;
         root.find('.title-doggo').html(input);
 
         $(this).text('Update').addClass('updateDoggoDesc');
+        $(this).removeClass('adminEditDoggo');
     });
 
     $(document).on('click', '.updateDoggoDesc', function(){
         const root = $(this).parent().parent().parent();
         const id = root.find('.adminPanelDoggo img').attr('alt').split('&')[1].trim();
-        const title = root.find('.titleDoggo').val();
+        const title = root.find('.doggoTitle').val();
         const desc = root.find('.doggoDesc').val();
-        alert(`${title}, ${desc}`);
+        const updateDoggoInfo = 'updateDoggoInfo';
+        const that = $(this);
+
+        if(title != '' && desc != ''){
+            $.ajax({
+                type: 'POST',
+                url: 'includes/ajax.php',
+                data:{id, title, desc, updateDoggoInfo},
+                success(data){
+                    if(data){
+                        that.addClass('adminEditDoggo');
+                        that.html('<span class="far fa-edit"></span>').removeClass('updateDoggoDesc');
+                        root.find('.title-doggo').text(title);
+                        root.find('.comment-text').text(desc);
+                    }
+                }
+            })
+        }  
+    })
+
+    $(document).on('click', '.adminDeleteDoggo', function(){
+        const root = $(this).parent().parent().parent();
+        const id = root.find('.adminPanelDoggo img').attr('alt').split('&')[1].trim();
+        const deleteDoggo = 'deleteDoggo';
+
+        if(confirm("Are you sure?")){
+            $.ajax({
+                type: 'POST',
+                url: 'includes/ajax.php',
+                data: {id, deleteDoggo},
+                success(data){
+                    if(data){
+                        root.parent().remove();
+                    }
+                }
+            })
+        }
+    })
+
+    $(document).on('click', '.page-link.pagination', function(e){
+        e.preventDefault();
+        const num = $(this).text().trim();
+        const pagginate = 'pagginate'
+        $.ajax({
+            type: 'POST',
+            url: 'includes/ajax.php',
+            data: {num, pagginate},
+            success(data){
+                if(data){
+                    console.log(data);
+                }
+            }
+        })
     })
 });

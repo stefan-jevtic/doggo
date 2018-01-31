@@ -94,24 +94,25 @@
             <div class="panel-body">
                 <ul class="list-group">
                     <?php 
-                        $all = listAllDoggosAndUsers($conn); 
-                        while($each = mysqli_fetch_array($all)):
+                        $all = listAllDoggosAndUsers($conn);
+                        $num = $all[0]['num']; 
+                        foreach($all as $a ):
                     ?>
                     <li class="list-group-item">
                         <div class="row">
                             <div class="col-xs-2 col-md-1 adminPanelDoggo">
-                                <img src="<?=$each['photo']?>" class="rounded-circle img-responsive" alt="<?=$each['title']."&".$each['id']?>" /></div>
+                                <img src="<?=$a['photo']?>" class="rounded-circle img-responsive" alt="<?=$a['title']."&".$a['id']?>" /></div>
                             <div class="col-xs-10 col-md-11 kurcina">
                                 <div>
                                     <div class="title-doggo">
-                                        <?=$each['title']?>
+                                        <?=$a['title']?>
                                     </div>
                                     <div class="mic-info">
-                                        By: <b><?=$each['username']?></a></b> on <b><?=$each['date']?></b>
+                                        By: <b><?=$a['username']?></a></b> on <b><?=$a['date']?></b>
                                     </div>
                                 </div>
                                 <div class="comment-text">
-                                    <?=$each['description']?>
+                                    <?=$a['desc']?>
                                 </div>
                                 <div class="action">
                                     <button type="button" class="btn btn-primary btn-xs adminEditDoggo" title="Edit">
@@ -124,15 +125,23 @@
                             </div>
                         </div>
                     </li>
-                    <?php endwhile ?>
+                    <?php endforeach ?>
                 </ul>
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        <li class="page-item"><a class="page-link pagination-previous" href="#">Previous</a></li>
+                        <?php
+                            $brojac = 1;
+                            $kica = ceil($num/5);
+                            while($kica > 0):
+                        ?>
+                              <li class="page-item"><a class="page-link pagination" href="#"><?=$brojac?></a></li>
+                        <?php
+                              $brojac++;
+                              $kica--;
+                            endwhile
+                        ?>
+                        <li class="page-item"><a class="page-link pagination-next" href="#">Next</a></li>
                     </ul>
                 </nav>
             </div>
