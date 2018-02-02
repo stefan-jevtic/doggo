@@ -352,21 +352,19 @@ return $row;
     }
     // select count(lajk) as lajkovi, id_doggo from likes where lajk = 1 and id_doggo in (1,4,9) group by id_doggo;
 
-    $GLOBALS['jsonAllDoggos'] = [];
-
     function listAllDoggosAndUsers($conn){
 
         $q = 'SELECT d.*, u.name as username FROM doggos d INNER JOIN users u on u.id = d.id_user';
         $r = mysqli_query($conn, $q);
-       
+        
         $num = mysqli_num_rows($r);
 
         while($row = mysqli_fetch_array($r)){
-            array_push($GLOBALS['jsonAllDoggos'], ["photo" => $row['photo'], "title" => $row['title'], "id" => $row['id'], "username" => $row['username'], "date" => $row['date'], "desc" => $row['description'], "num" => $num]);
+            array_push($_SESSION['abu'], ["photo" => $row['photo'], "title" => $row['title'], "id" => $row['id'], "username" => $row['username'], "date" => $row['date'], "desc" => $row['description'], "num" => $num]);
         }
         
         if(mysqli_num_rows($r) > 0){
-            return array_slice($GLOBALS['jsonAllDoggos'], 0, 5);
+            return array_slice($_SESSION['abu'], 0, 5);
         }
         else
             return false;
@@ -393,8 +391,8 @@ return $row;
     }
 
     function pagginateDoggos($num){
-        $arr = array_slice($GLOBALS['jsonAllDoggos'], 5*(int)$num-5, 5*(int)$num);
-        return $arr;
+        $arr = array_slice($_SESSION['abu'], 5*(int)$num-5, 5*(int)$num);
+        return count($_SESSION['abu']);
     }
 
 ?>

@@ -32,6 +32,7 @@ include("../server/model.php");
             $_SESSION['email'] = $row['email'];
             $_SESSION['avatar'] = $row['avatar'];
             $_SESSION['date'] = $row['date'];
+            $_SESSION['abu'] = [];
 
             echo 'redirect';
         }
