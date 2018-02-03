@@ -395,4 +395,41 @@ return $row;
         return $arr;
     }
 
+    function listAllCategories($conn){
+        $q = 'SELECT * FROM category';
+        $r = mysqli_query($conn, $q);
+
+        if($r)
+            return $r;
+    }
+
+    function deleteCategories($conn, $ids){
+        $q = 'DELETE FROM category WHERE id IN ('.$ids.')';
+        $r = mysqli_query($conn, $q);
+
+        if($r)
+            return true;
+        else
+            return false;
+    }
+
+    function addCategory($conn, $cat){
+        $q = 'INSERT INTO category VALUES (null, "'.$cat.'")';
+        $r = mysqli_query($conn, $q);
+
+        if($r){
+            $q1 = 'SELECT * FROM category WHERE name="'.$cat.'"';
+            $r1 = mysqli_query($conn, $q1);
+            if(mysqli_num_rows($r1) == 1){
+                $row = mysqli_fetch_array($r1);
+                $id = $row['id'];
+                return $id; 
+            }
+            else
+                return false;
+        }
+        else
+            return false;
+    }
+
 ?>

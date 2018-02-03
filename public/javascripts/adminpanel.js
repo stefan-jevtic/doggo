@@ -82,7 +82,6 @@ $(document).ready( () => {
             
         }
 
-
         if(!regEmail.test(email)){
             $('.email.error').text('Email is invalid').css({'color': 'red', 'font-size': '12px'});
             counter++;
@@ -153,6 +152,7 @@ $(document).ready( () => {
         root.find('.comment-text').html(textarea);
         const input = `<input type="text" class="form-control doggoTitle" value="${title}">`;
         root.find('.title-doggo').html(input);
+        root.find('.adminDeleteDoggo').prop('disabled', true)
 
         $(this).text('Update').addClass('updateDoggoDesc');
         $(this).removeClass('adminEditDoggo');
@@ -177,6 +177,7 @@ $(document).ready( () => {
                         that.html('<span class="far fa-edit"></span>').removeClass('updateDoggoDesc');
                         root.find('.title-doggo').text(title);
                         root.find('.comment-text').text(desc);
+                        root.find('.adminDeleteDoggo').prop('disabled', false)
                     }
                 }
             })
@@ -226,5 +227,104 @@ $(document).ready( () => {
                 }
             }
         })
+    })
+
+    $('.btnDeleteCategory').click( () => {
+        $('.cancelEditing').css('display', 'inline');
+        $('.btnAddCategory').prop('disabled', true);
+        if($('.list-of-categories .active').length>0){
+            let selectedCat = [];
+            $('.list-of-categories .active').each( function(){
+                selectedCat.push($(this).find('input').val());
+            })
+            selectedCat = selectedCat.join(', ');
+            const delCat = 'delCat';
+
+            $.ajax({
+                type: 'POST',
+                url: 'includes/ajax.php',
+                data: {selectedCat, delCat},
+                success(data){
+                    if(data){
+                        $('.list-of-categories .active').each( function(){
+                          $(this).remove();
+                        })
+                        $('.btnAddCategory').prop('disabled', false);
+                        $('.list-of-categories .list-group-item-action').each( function(){
+                            $(this).prop('disabled', true);
+                        })
+                        $('.btnDeleteCategory').html('Delete categories')
+                        $('.cancelEditing').css('display', 'none');
+                    }
+                }
+            })
+        }
+        else{
+            $('.list-of-categories .list-group-item-action[disabled]').each( function(){
+            $(this).prop('disabled', false);
+        })
+        }
+        
+    })
+
+    $(document).on('click', '.list-group-item-action', function(){
+        if($(this).hasClass('active'))
+            $(this).removeClass('active')
+        else
+            $(this).addClass('active')
+
+        if($('.list-of-categories .active').length>0)
+            $('.btnDeleteCategory').html('Delete selected categories')
+        else
+            $('.btnDeleteCategory').html('Delete categories')
+    })
+
+    $('.btnAddCategory').click( () => {
+        $('.btnDeleteCategory').prop('disabled', true);
+        $('.cancelEditing').css('display', 'inline');
+        if($('.list-of-categories #new_category').length > 0){
+            const cat = $('#new_category').val();
+            const addCat = 'addCat';
+            if(cat != ''){
+                $.ajax({
+                    type: 'POST',
+                    url: 'includes/ajax.php',
+                    data: {cat, addCat},
+                    success(data){
+                        if(data){
+                            $('.list-of-categories #new_category').remove();
+                            $('.list-of-categories').append(` <button type="button" class="list-group-item list-group-item-action" disabled>
+                            ${cat}<input type="hidden" value="${data}">
+                        </button>`);
+                        $('.btnDeleteCategory').prop('disabled', false);
+                        $('.cancelEditing').css('display', 'none');
+                        }
+                    }
+                })
+            }  
+        }
+        else{
+            $('.list-of-categories').append('<input type="text" id="new_category" class="form-control" placeholder="insert new category">');
+        }
+    })
+
+    $('.cancelEditing').click( function(){
+        if($('.list-of-categories #new_category').length > 0){
+            $('.btnDeleteCategory').prop('disabled', false);
+            $('.list-of-categories #new_category').remove();
+            $(this).css('display', 'none');
+        }
+
+        if($('.list-of-categories .list-group-item-action[disabled]').length == 0 || $('.list-of-categories .active').length>0){
+            $('.list-of-categories .active').each( function(){
+                $(this).removeClass('active');
+            })
+            $('.btnAddCategory').prop('disabled', false);
+            $('.list-of-categories .list-group-item-action').each( function(){
+                $(this).prop('disabled', true);
+            })
+            $('.btnDeleteCategory').html('Delete categories')
+            $(this).css('display', 'none');
+        }
     })
 });

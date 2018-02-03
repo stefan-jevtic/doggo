@@ -367,3 +367,11 @@ div.paragraph {
 .abu{
     width: 800px;
 }
+.category-holder{
+    width: 50%;
+    text-align: center;
+    margin: 45 auto;
+}
+.category-holder .btn{
+    margin: 20px;
+}

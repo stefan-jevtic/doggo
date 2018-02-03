@@ -241,4 +241,25 @@ include("../server/model.php");
             echo false;
     }
 
+    if(isset($_POST['delCat'])){
+        $ids = $_POST['selectedCat'];
+
+        $res = deleteCategories($conn, $ids);
+        if($res)
+            echo true;
+        else
+            echo false;
+    }
+
+    if(isset($_POST['addCat'])){
+        $cat = $_POST['cat'];
+
+        $res = addCategory($conn, $cat);
+
+        if($res)
+            echo $res;
+        else
+            echo false;
+    }
+
 ?>
