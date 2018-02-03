@@ -391,7 +391,7 @@ return $row;
     }
 
     function pagginateDoggos($num){
-        $arr = array_slice($_SESSION['abu'], 5*(int)$num-5, 5*(int)$num);
+        $arr = array_slice($_SESSION['abu'], 5*(int)$num-5, 5);
         return $arr;
     }
 

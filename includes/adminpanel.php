@@ -102,13 +102,13 @@
                         <div class="row">
                             <div class="col-xs-2 col-md-1 adminPanelDoggo">
                                 <img src="<?=$a['photo']?>" class="rounded-circle img-responsive" alt="<?=$a['title']."&".$a['id']?>" /></div>
-                            <div class="col-xs-10 col-md-11 kurcina">
+                            <div class="col-xs-10 col-md-11 abu">
                                 <div>
                                     <div class="title-doggo">
                                         <?=$a['title']?>
                                     </div>
                                     <div class="mic-info">
-                                        By: <b><?=$a['username']?></a></b> on <b><?=$a['date']?></b>
+                                        By: <b><?=$a['username']?></b> on <b><?=$a['date']?></b>
                                     </div>
                                 </div>
                                 <div class="comment-text">
@@ -129,19 +129,23 @@
                 </ul>
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
-                        <li class="page-item"><a class="page-link pagination-previous" href="#">Previous</a></li>
+                        <!-- <li class="page-item"><a class="page-link pagination-previous" href="#">Previous</a></li> -->
                         <?php
                             $brojac = 1;
                             $kica = ceil($num/5);
                             while($kica > 0):
+                              if($brojac == 1)
+                                $active = 'active';
+                              else
+                                $active = '';
                         ?>
-                              <li class="page-item"><a class="page-link pagination" href="#"><?=$brojac?></a></li>
+                              <li class="page-item <?=$active?>"><a class="page-link pagination" href="#"><?=$brojac?></a></li>
                         <?php
                               $brojac++;
                               $kica--;
                             endwhile
                         ?>
-                        <li class="page-item"><a class="page-link pagination-next" href="#">Next</a></li>
+                        <!-- <li class="page-item"><a class="page-link pagination-next" href="#">Next</a></li> -->
                     </ul>
                 </nav>
             </div>

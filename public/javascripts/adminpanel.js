@@ -204,15 +204,25 @@ $(document).ready( () => {
 
     $(document).on('click', '.page-link.pagination', function(e){
         e.preventDefault();
+        $(this).parent().parent().find('.active').removeClass('active');
         const num = $(this).text().trim();
         const pagginate = 'pagginate'
+        const that = this;
         $.ajax({
             type: 'POST',
             url: 'includes/ajax.php',
             data: {num, pagginate},
             success(data){
                 if(data){
-                    console.log(data);
+                    data = JSON.parse(data);
+                    let html = '';
+                    data.map( row => {
+                        html += `<li class="list-group-item">
+                        <div class="row"><div class="col-xs-2 col-md-1 adminPanelDoggo"><img src="${row.photo}" class="rounded-circle img-responsive" alt="${row.title}&${row.id}" /></div><div class="col-xs-10 col-md-11 abu"><div><div class="title-doggo">${row.title}</div><div class="mic-info">By: <b>${row.username}</b> on <b>${row.date}</b></div></div><div class="comment-text">${row.desc}</div><div class="action"><button type="button" class="btn btn-primary btn-xs adminEditDoggo" title="Edit"><span class="far fa-edit"></span></button><button type="button" class="btn btn-danger btn-xs adminDeleteDoggo" title="Delete"><span class="far fa-trash-alt"></span></button></div></div></div>
+                        </li>`;
+                    })
+                    $('ul.list-group').html(html);
+                    $(that).parent().addClass('active');
                 }
             }
         })
