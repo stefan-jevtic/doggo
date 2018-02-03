@@ -235,11 +235,10 @@ include("../server/model.php");
 
         $res = pagginateDoggos($num);
 
-        // if($res)
-        //     echo $res;
-        // else
-        //     echo false;
-        echo $res;
+        if($res)
+            echo json_encode($res);
+        else
+            echo false;
     }
 
 ?>
