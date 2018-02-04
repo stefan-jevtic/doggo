@@ -328,7 +328,7 @@ $(document).ready( () => {
         }
     })
 
-    $('.btnShowRes').click( () => {
+    $(document).on( 'click', '.btnShowRes', () => {
         const getPoll = 'getPoll';
         $.ajax({
             type: 'POST',
@@ -365,7 +365,7 @@ $(document).ready( () => {
                     data = JSON.parse(data);
                     data.map( row => {
                         html += `<span class="poll-answer">
-                        <input type="radio" name="rbAnswer" class="rbAnswer"> ${row.answer}
+                        <input type="radio" name="rbAnswer" class="rbAnswer" value="${row.id}"> ${row.answer}
                         </span><br>`
                     })
                     html += `</div><div class="poll-footer">
@@ -377,6 +377,21 @@ $(document).ready( () => {
                     </span>
                 </div>`;
                     $('.poll-holder').html(html);
+                }
+            }
+        })
+    })
+
+    $(document).on( 'click', '.btnVote', () => {
+        const idRes = $('input[name="rbAnswer"]:checked').val();
+        const voted = 'voted';
+        $.ajax({
+            type: 'POST',
+            url: 'includes/ajax.php',
+            data: {idRes, voted},
+            success(data){
+                if(data){
+                    $('input[name="rbAnswer"]:checked').prop('checked', false);
                 }
             }
         })

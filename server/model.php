@@ -442,4 +442,13 @@ return $row;
             return false;
     }
 
+    function voting($conn, $idRes){
+        $q = 'UPDATE poll_answer SET vote = vote + 1 WHERE id ='.$idRes;
+        $r = mysqli_query($conn, $q);
+        if($r)
+            return true;
+        else 
+            return false;
+    }
+
 ?>

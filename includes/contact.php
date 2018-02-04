@@ -12,14 +12,14 @@
             $counter = 0;
             while($row = mysqli_fetch_array($ques)): 
                 if($counter == 0):
-        ?>
+        ?>  
             <div class="poll-header">
                 <?= $row['question'] ?>
             </div>
             <div class="poll-body">
                 <?php endif; $counter++; ?>
                 <span class="poll-answer">
-                    <input type="radio" name="rbAnswer" class="rbAnswer"> <?= $row['answer'] ?>
+                    <input type="radio" name="rbAnswer" class="rbAnswer" value="<?=$row['id']?>"> <?= $row['answer'] ?>
                 </span><br>
                 <?php endwhile ?>
             </div>

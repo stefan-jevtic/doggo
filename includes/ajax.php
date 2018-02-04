@@ -266,10 +266,19 @@ include("../server/model.php");
         $res = getQandA($conn);
         $abu = [];
         while($row = mysqli_fetch_array($res)){
-            array_push($abu, ["answer" => $row['answer'], "vote" => $row ['vote']]);
+            array_push($abu, ["id" => $row['id'], "answer" => $row['answer'], "vote" => $row ['vote']]);
         }
         if($res)
             echo json_encode($abu);
+        else
+            echo false;
+    }
+
+    if(isset($_POST['voted'])){
+        $idRes = $_POST['idRes'];
+        $res = voting($conn, $idRes);
+        if($res)
+            echo true;
         else
             echo false;
     }
