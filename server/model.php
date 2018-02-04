@@ -432,4 +432,14 @@ return $row;
             return false;
     }
 
+    function getQandA($conn){
+        $q = 'SELECT * FROM poll_question p INNER JOIN poll_answer a on p.id = a.id_question';
+        $r = mysqli_query($conn, $q);
+
+        if($r)
+            return $r;
+        else
+            return false;
+    }
+
 ?>

@@ -262,4 +262,16 @@ include("../server/model.php");
             echo false;
     }
 
+    if(isset($_POST['getPoll'])){
+        $res = getQandA($conn);
+        $abu = [];
+        while($row = mysqli_fetch_array($res)){
+            array_push($abu, ["answer" => $row['answer'], "vote" => $row ['vote']]);
+        }
+        if($res)
+            echo json_encode($abu);
+        else
+            echo false;
+    }
+
 ?>

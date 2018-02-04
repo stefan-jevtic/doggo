@@ -327,4 +327,58 @@ $(document).ready( () => {
             $(this).css('display', 'none');
         }
     })
+
+    $('.btnShowRes').click( () => {
+        const getPoll = 'getPoll';
+        $.ajax({
+            type: 'POST',
+            url: 'includes/ajax.php',
+            data: {getPoll},
+            success(data){
+                if(data){
+                    let html = ``;
+                    data = JSON.parse(data);
+                    data.map( row => {
+                        html += `${row.answer} <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: ${row.vote}%" aria-valuenow="${row.vote}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>`
+                    })
+                    html += `<a href="#" class="back-to-poll">Back to Poll</a>`;
+                    $('.poll-holder').html(html);
+                }
+            }
+        })
+    })
+
+    $(document).on( 'click', '.back-to-poll', e => {
+        e.preventDefault();
+        const getPoll = 'getPoll';
+        $.ajax({
+            type: 'POST',
+            url: 'includes/ajax.php',
+            data: {getPoll},
+            success(data){
+                if(data){
+                    let html = `<div class="poll-header">
+                        Rate our doggo social network
+                    </div><div class="poll-body">`;
+                    data = JSON.parse(data);
+                    data.map( row => {
+                        html += `<span class="poll-answer">
+                        <input type="radio" name="rbAnswer" class="rbAnswer"> ${row.answer}
+                        </span><br>`
+                    })
+                    html += `</div><div class="poll-footer">
+                    <span class="button-vote">
+                        <button type="button" class="btn btn-success btnVote">Vote</button>
+                    </span>
+                    <span class="button-results">
+                        <button type="button" class="btn btn-primary btnShowRes">Show results</button>
+                    </span>
+                </div>`;
+                    $('.poll-holder').html(html);
+                }
+            }
+        })
+    })
 });

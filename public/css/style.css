@@ -375,3 +375,39 @@ div.paragraph {
 .category-holder .btn{
     margin: 20px;
 }
+.poll-holder{
+    width: 600px;
+    margin: 50 auto;
+    /* text-align: center; */
+    /* border: 1px solid #5bc0de; */
+    border-radius: 5px;
+}
+.poll-header{
+    background-color: #428bca;
+    color: #fff;
+    font-size: 30px;
+    text-align: center;
+    border-radius: 5px 5px 0px 0px;
+}
+.poll-body{
+    width: 100%;
+    color: #428bca;
+    font-size: 20px;
+    padding: 10px;
+    border-right: 1px solid #5bc0de;
+    border-left: 1px solid #5bc0de;
+}
+.poll-footer{
+    padding: 10px;
+    margin-bottom: 10px;
+    width:100%;
+    height: 50px;
+    text-align: center;
+    border: 1px solid #5bc0de;
+}
+.progress-holder{
+    width: 600px;
+}
+.progress{
+    margin-bottom: 10px;
+}
