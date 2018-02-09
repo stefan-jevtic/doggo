@@ -37,7 +37,7 @@ $(document).ready( () => {
         }
     }
   
-    $('.load-more').click(function(e){
+    $(document).on('click', '.load-more', function(e){
         e.preventDefault();
         const root = $(this).parent();
         const doggo_id = $(this).attr('href');
@@ -49,6 +49,10 @@ $(document).ready( () => {
         })
 
         let res = slice_comments(obj, doggo_id, comments);
+
+        if(res.length==0){
+            $(this).text('No more comments');
+        }
 
         res.map( comm => {
             html += '<div class="each-comment"><span class="user-image"><img src="'+comm.avatar+'" alt="'+comm.username +'&' + comm.id_user+'"></span><span class="user-name"><b>'+comm.username+'</b></span><small class="form-test text-muted date-commented">'+comm.date+'</small><div class="user-message"><p>'+comm.comment+'</p></div></div>';
@@ -175,6 +179,10 @@ $(document).ready( () => {
                     root.find('.insert-comment').removeClass('active');
                     let num_comm = root.find('.statistics').find('.comments-counter').text().replace(/[^\d]/g, '').trim();
                     root.find('.statistics').find('.comments-counter').text(++num_comm + ' comments');
+                    if(num_comm>3){
+                        root.find('.list-of-comments').append(`<a href="${id_doggo}" class="btn btn-primary btn-block load-more">Load more comments</a>`);
+                    }
+                    root.find('div.alert.alert-primary').remove();
                 }
             }
         })

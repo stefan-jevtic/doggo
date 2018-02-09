@@ -75,11 +75,18 @@
                         $counter++;
                         endwhile;
                     else:
-                            echo $comments;
+                        ?>
+                            <div class="alert alert-primary" role="alert">
+                                No comments yet for this doggo!
+                            </div>
+                        <?php
                     endif; 
                 ?>
             </div>
+            <?php if(mysqli_num_rows($comments)>3):?>
+            <div class="pusher"></div>
             <a href="<?=$row['id'] ?>" class="btn btn-primary btn-block load-more">Load more comments</a>
+                <?php endif; ?>
         </div>
         <?php endwhile ?>
     </div>

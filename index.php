@@ -106,5 +106,39 @@ include("server/model.php");
                     }
                 ?>
             </div>
+        <footer>
+            <div class="footerHeader" ></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4" >
+                    <h3>Disclaimer!</h3>
+                    <p>
+                    I do not own most of the images posted here and it is not my intention to profit from this website in any way. This website is simply for educational purposes. All rights go to their respectful owners.
+                    </p>
+                </div>
+                
+                <div class="col-md-4">
+                    <h3>Our Location </h3>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d181152.8874797972!2d20.2965498!3d44.811095!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475a7aa3d7b53fbd%3A0x1db8645cf2177ee4!2z0JHQtdC-0LPRgNCw0LQ!5e0!3m2!1ssr!2srs!4v1518209229801" sytle="" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+                <div class="col-md-4" >
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>Phone : 123 - 456 - 789</li>
+                        <li>E-mail : info@comapyn.com</li>
+                        <li>Fax : 123 - 456 - 789</li>
+                        <li>Author: <a href="http://jevticstefan.herokuapp.com/">Stefan Jevtic 45/15</a></li>
+                        <li>Documentation: <a href="">docs</a></li>
+                    </ul>
+                    <ul class="sm">
+                        <li><a href="#" ><img src="https://www.facebook.com/images/fb_icon_325x325.png" class="img-responsive"></a></li>
+                        <li><a href="#" ><img src="https://lh3.googleusercontent.com/00APBMVQh3yraN704gKCeM63KzeQ-zHUi5wK6E9TjRQ26McyqYBt-zy__4i8GXDAfeys=w300" class="img-responsive" ></a></li>
+                        <li><a href="#" ><img src="http://playbookathlete.com/wp-content/uploads/2016/10/twitter-logo-4.png" class="img-responsive"  ></a></li>
+                    </ul>
+                </div>
+                </div>
+                
+            </div>
+        </footer>
     </body>
 </html>

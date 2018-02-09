@@ -11,7 +11,6 @@
   <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Users panel</a>
   <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Doggo panel</a>
   <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Category panel</a>
-  <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Poll panel</a>
 </div>
 <div class="tab-content" id="v-pills-tabContent">
   <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
@@ -21,21 +20,6 @@
           <div class="col-xs-12 col-sm-12 col-md-3">
             <h2 class="text-center pull-left" style="padding-left: 30px;"> <span class="glyphicon glyphicon-list-alt"> </span> Users </h2>
           </div>
-          <!-- <div class="col-xs-9 col-sm-9 col-md-9">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-              <div class="col-xs-12 col-md-4">
-                <label> Search </label>
-                <div class="form-group">
-                  <div class="input-group">
-                    <input type="text" class="form-control input-md" name="search">
-                    <div class="input-group-btn">
-                      <button type="button" class="btn btn-md btn-warning"> <span class=" glyphicon glyphicon-search"></span></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
         </div>
       </div>
 

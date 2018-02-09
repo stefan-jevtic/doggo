@@ -165,51 +165,58 @@ $(document).ready( () => {
             $('.username.error').text('');
         }
 
-        $.ajax({
-            type: 'POST',
-            url: 'includes/ajax.php',
-            data: {username, checkUsername},
-            success(data){
-                if(data == 'Free'){
-                    $('.username.error').text('Valid username!').css({'color': 'green', 'font-size': '12px'});
-                    available = true;
-                }
-                else{
-                    $('.username.error').text('Username is already taken!').css({'color': 'red', 'font-size': '12px'});
-                    available = false;
-                }
-            }
-        })
-
-        if(!error && available){
+        new Promise((resolve, reject) => {
             $.ajax({
                 type: 'POST',
                 url: 'includes/ajax.php',
-                data: {username, changeUser},
+                data: {username, checkUsername},
                 success(data){
-                    if(data == 'Success'){
-                        
-                        $('.modalSuccess').modal('toggle');
-                        $('.modalSuccess .modal-body .alert-success').text('Username successfully changed!');
-
-                        setTimeout( () => {
-                            $('.modalSuccess').modal('hide');
-                        }, 1000);
-
-                        $('#tbChangeUsername').val('');
-                        $('#changeUsername').modal('hide');
-                        $('.username.error').text('');
-                        $('.user-row').html(username);
-                        $('.card-title').html(username);
+                    if(data == 'Free'){
+                        $('.username.error').text('Valid username!').css({'color': 'green', 'font-size': '12px'});
+                        available = true;
+                        resolve(available);
+                    }
+                    else{
+                        $('.username.error').text('Username is already taken!').css({'color': 'red', 'font-size': '12px'});
+                        available = false;
+                        resolve(available);
                     }
                 }
             })
-        }
+        }) 
+        .then(available => {
+            if(!error && available){
+                $.ajax({
+                    type: 'POST',
+                    url: 'includes/ajax.php',
+                    data: {username, changeUser},
+                    success(data){
+                        if(data == 'Success'){
+                            
+                            $('.modalSuccess').modal('toggle');
+                            $('.modalSuccess .modal-body .alert-success').text('Username successfully changed!');
+
+                            setTimeout( () => {
+                                $('.modalSuccess').modal('hide');
+                            }, 1000);
+
+                            $('#tbChangeUsername').val('');
+                            $('#changeUsername').modal('hide');
+                            $('.username.error').text('');
+                            $('.user-row').html(username);
+                            $('.card-title').html(username);
+                        }
+                    }
+                })
+            }
+        })
     })
 
     $('.close').click( () => {
         $('#tbChangeUsername').val('');
+        $('.username.error').text('');
         $('#tbChangeEmail').val('');
+        $('.email.error').text('');
     });
 
 

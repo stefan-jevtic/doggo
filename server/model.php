@@ -91,11 +91,13 @@
             $res2 = mysqli_query($conn, $query2);
 
             if($res2){
-                $query3 = 'INSERT INTO profile_pictures(id_user, path) VALUES("'.$_SESSION['id'].'", "'.$current.'")';
-                $res3 = mysqli_query($conn, $query3);
-
-                if($res3)
-                    return 'Successfully changed!';
+                $query4 = 'SELECT * FROM profile_pictures WHERE path="'.$current.'" AND id_user='.$_SESSION['id'];
+                $res4 = mysqli_query($conn, $query4);
+                if(mysqli_num_rows($res4) == 0){
+                    $query3 = 'INSERT INTO profile_pictures(id_user, path) VALUES("'.$_SESSION['id'].'", "'.$current.'")';
+                    $res3 = mysqli_query($conn, $query3);
+                }
+                return 'Successfully changed!';
             }
             else{
                 return "Uploading failed inner!";
