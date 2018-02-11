@@ -453,4 +453,13 @@ return $row;
             return false;
     }
 
+    function randomNine($conn){
+        $q = 'SELECT * FROM doggos ORDER BY RAND() LIMIT 9';
+        $r = mysqli_query($conn, $q);
+        if($r)
+            return $r;
+        else 
+            return false;
+    }
+
 ?>

@@ -1,13 +1,3 @@
-/**
- * 
- * 
- * 
- * TODO: proveri regexe za textarea i title, ima bagova!
- * 
- * 
- * 
- */
-
 $(document).ready( () => {
     $('#btnUploadDoggo').click( (e) => {
 
@@ -21,7 +11,7 @@ $(document).ready( () => {
         let counter = 0;
 
         const regTitle = /^[A-Za-z0-9]{1,20}(\s?[A-Za-z0-9]{1,20}){0,3}$/;
-        const regDesc = /^[A-Za-z0-9\.\!\?\-\_\,]{1,20}(\s?[A-Za-z0-9\.\!\?\-\_\,]{1,40}){0,20}$/;
+        // const regDesc = /^[A-Za-z0-9\.\!\?\-\_\,]{1,20}(\s?[A-Za-z0-9\.\!\?\-\_\,]{1,40}){0,20}$/;
         const regCategory = /^(1|2|3|4)$/;
         const regExtension = /^(png|jpe?g)$/;
 
@@ -31,9 +21,9 @@ $(document).ready( () => {
             $('.title.error').text('Title is invalid! Min 4 chars, max 20').css({'color': 'red', 'font-size': '12px'});
         }
 
-        if(!regDesc.test(description)){
+        if(description.length < 5 || description.length > 100){
             counter++;
-            $('.description.error').text('Description is invalid! Min 5 chars, max 140').css({'color': 'red', 'font-size': '12px'});
+            $('.description.error').text('Description is invalid! Min 5 chars, max 100').css({'color': 'red', 'font-size': '12px'});
         }
 
         if(!regCategory.test(category)){
