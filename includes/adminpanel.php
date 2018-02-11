@@ -2,7 +2,7 @@
 
     include("../server/model.php");
     include("../server/connection.php");
-
+    if(isset($_SESSION['username']) && $_SESSION['role'] == 'admin'):
 ?>
 <div class="row">
 
@@ -225,3 +225,8 @@
     </div>
   </div>
 </div>
+<?php 
+      else:
+        include("404.php");
+endif 
+?>

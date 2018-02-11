@@ -234,4 +234,7 @@ session_start();
 </div>
 <?php
     }
+    else{
+        include("404.php");
+    }
 ?>

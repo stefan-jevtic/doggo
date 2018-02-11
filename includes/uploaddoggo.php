@@ -2,7 +2,7 @@
 
     include('../server/model.php');
     include('../server/connection.php');
-
+        if(isset($_SESSION['username'])):
 ?>
 <div class="row justify-content-md-center">
     <div class="col-md-6 align-self-center">
@@ -39,3 +39,8 @@
         </form>
     </div>
 </div>
+<?php
+        else:
+            include("404.php");
+    endif    
+?>
