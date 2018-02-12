@@ -129,7 +129,7 @@ include("server/model.php");
                         <li>E-mail : info@comapyn.com</li>
                         <li>Fax : 123 - 456 - 789</li>
                         <li>Author: <a href="http://jevticstefan.herokuapp.com/">Stefan Jevtic 45/15</a></li>
-                        <li>Documentation: <a href="">docs</a></li>
+                        <li>Documentation: <a href="docs.pdf">docs</a></li>
                     </ul>
                     <ul class="sm">
                         <li><a href="https://www.facebook.com/hidoggo/" target="_blank"><img src="https://www.facebook.com/images/fb_icon_325x325.png" class="img-responsive"></a></li>
