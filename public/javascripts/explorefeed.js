@@ -164,27 +164,29 @@ $(document).ready( () => {
         const text = root.find('.comment-textarea').val();
         const insertComment = 'insertComment';
         
-        $.ajax({
-            type: 'POST',
-            url: 'includes/ajax.php',
-            data: {id_doggo, id_user, text, insertComment},
-            success(data){
-                if(data){
-                    data = JSON.parse(data);
-                    const date = new Date();
-                    const date_now = date.getFullYear()+'-'+date.getMonth()+1+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
-                    let html = '<div class="each-comment"><span class="user-image"><img src="'+data['avatar']+'" alt="'+data['name']+'&'+id_user+'"></span><span class="user-name"><b>'+data['name']+'</b></span><small class="form-test text-muted date-commented">'+date_now+'</small><div class="user-message"><p>'+text+'</p></div></div>';
-                    root.find('.list-of-comments').append(html);
-                    root.find('.insert-comment textarea').val('');
-                    root.find('.insert-comment').removeClass('active');
-                    let num_comm = root.find('.statistics').find('.comments-counter').text().replace(/[^\d]/g, '').trim();
-                    root.find('.statistics').find('.comments-counter').text(++num_comm + ' comments');
-                    if(num_comm>3){
-                        root.find('.list-of-comments').append(`<a href="${id_doggo}" class="btn btn-primary btn-block load-more">Load more comments</a>`);
+        if(text != ''){
+            $.ajax({
+                type: 'POST',
+                url: 'includes/ajax.php',
+                data: {id_doggo, id_user, text, insertComment},
+                success(data){
+                    if(data){
+                        data = JSON.parse(data);
+                        const date = new Date();
+                        const date_now = date.getFullYear()+'-'+date.getMonth()+1+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
+                        let html = '<div class="each-comment"><span class="user-image"><img src="'+data['avatar']+'" alt="'+data['name']+'&'+id_user+'"></span><span class="user-name"><b>'+data['name']+'</b></span><small class="form-test text-muted date-commented">'+date_now+'</small><div class="user-message"><p>'+text+'</p></div></div>';
+                        root.find('.list-of-comments').append(html);
+                        root.find('.insert-comment textarea').val('');
+                        root.find('.insert-comment').removeClass('active');
+                        let num_comm = root.find('.statistics').find('.comments-counter').text().replace(/[^\d]/g, '').trim();
+                        root.find('.statistics').find('.comments-counter').text(++num_comm + ' comments');
+                        if(num_comm>3){
+                            root.find('.list-of-comments').append(`<a href="${id_doggo}" class="btn btn-primary btn-block load-more">Load more comments</a>`);
+                        }
+                        root.find('div.alert.alert-primary').remove();
                     }
-                    root.find('div.alert.alert-primary').remove();
                 }
-            }
-        })
+            })
+        }
     })
 })
